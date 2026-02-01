@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collaborative Canvas</title>
 </head>
 <body>
-    <div id="toolbar">
-        <input type="color" id="colorPicker">
-        <input type="range" id="sizePicker" min="1" max="2" value="4">
-        <button id="brushBtn">Brush</button>
-        <button id="eraserBtn">Eraser</button>
-        <button id="undoBtn">Undo</button>
-        <button id="redoBtn">Redo</button>
-    </div>
-    <div id="users"></div>
-    <canvas id="canvas" width="900" height="700"></canvas>
-    <script type="module" src="main.js"></script>
+
+  <div id="toolbar">
+    <input type="color" id="colorPicker" />
+    <input type="range" id="sizePicker" min="1" max="20" value="4" />
+    <button id="brushBtn">Brush</button>
+    <button id="eraserBtn">Eraser</button>
+    <button id="undoBtn">Undo</button>
+    <button id="redoBtn">Redo</button>
+  </div>
+
+  <div id="users"></div>
+
+  <canvas id="canvas" width="900" height="700"></canvas>
+
+  <!-- ✅ Socket.IO client (MUST come first) -->
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+  <!-- ✅ Your JS files (NO module type) -->
+  <script src="./canvas.js"></script>
+  <script src="./websocket.js"></script>
+  <script src="./main.js"></script>
+
 </body>
 </html>
