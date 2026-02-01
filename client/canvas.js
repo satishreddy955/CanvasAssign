@@ -1,4 +1,3 @@
-// Simple browser-safe UUID generator
 function generateId() {
   return crypto.randomUUID
     ? crypto.randomUUID()
@@ -19,17 +18,9 @@ class CanvasEngine {
     this.mode = "brush";
   }
 
-  setColor(c) {
-    this.color = c;
-  }
-
-  setWidth(w) {
-    this.width = w;
-  }
-
-  setMode(m) {
-    this.mode = m;
-  }
+  setColor(c) { this.color = c; }
+  setWidth(w) { this.width = w; }
+  setMode(m) { this.mode = m; }
 
   startDrawing(x, y) {
     this.isDrawing = true;
@@ -46,7 +37,6 @@ class CanvasEngine {
 
     const pts = this.currentStroke.points;
     const last = pts[pts.length - 1];
-
     pts.push({ x, y });
 
     this.ctx.strokeStyle = this.currentStroke.color;
@@ -61,11 +51,9 @@ class CanvasEngine {
 
   stopDrawing() {
     if (!this.isDrawing) return null;
-
     this.isDrawing = false;
     const stroke = this.currentStroke;
     this.currentStroke = null;
-
     return stroke;
   }
 
@@ -76,28 +64,22 @@ class CanvasEngine {
 
   redraw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    for (const stroke of this.history) {
-      this.drawStroke(stroke);
-    }
+    this.history.forEach(s => this.drawStroke(s));
   }
 
   drawStroke(stroke) {
     const ctx = this.ctx;
-
     ctx.strokeStyle = stroke.color;
     ctx.lineWidth = stroke.width;
     ctx.lineCap = "round";
 
     ctx.beginPath();
     ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
-
     for (let i = 1; i < stroke.points.length; i++) {
       ctx.lineTo(stroke.points[i].x, stroke.points[i].y);
     }
-
     ctx.stroke();
   }
 }
 
-// Make it globally accessible
 window.CanvasEngine = CanvasEngine;
